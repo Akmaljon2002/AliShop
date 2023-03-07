@@ -16,15 +16,12 @@
 			  	<img src="{{bolim.rasm.url}}">
 			  </div>
 			  <div class="card-body">
-			    <h4 class="card-title"><a href="#">{{bolim.nom}}</a></h4>
-<!--			    <ul class="list-menu">-->
-<!--			    	<li><a href="">Unisex T shirts</a></li>-->
-<!--					<li><a href="">Casual shirts</a></li>-->
-<!--					<li><a href="">Scherf Ice cream</a></li>-->
-<!--					<li><a href="">Another category</a></li>-->
-<!--					<li><a href="">Great items name</a></li>-->
-<!--					<li><a href="">Great items name</a></li>-->
-<!--			    </ul>-->
+			    <h4 class="card-title"><a href="/asosiy/bolim/{{bolim.id}}/">{{bolim.nom}}</a></h4>
+			    <ul class="list-menu">
+					{% for mahsulot in bolim.mahsulot_set.all|slice:"0:6" %}
+			    	<li><a href="/asosiy/mahsulot/{{mahsulot.id}}/">{{mahsulot.nom}}</a></li>
+					{% endfor %}
+			    </ul>
 			  </div>
 			</div>
 		</div> <!-- col.// -->

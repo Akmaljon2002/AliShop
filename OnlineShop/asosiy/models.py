@@ -1,4 +1,8 @@
 from django.db import models
+from userapp.models import *
+
+# from OnlineShop.userapp.models import Profil
+
 
 class Bolim(models.Model):
     nom = models.CharField(max_length=100)
@@ -24,3 +28,12 @@ class Mahsulot(models.Model):
 class Media(models.Model):
     rasm = models.FileField(upload_to='mahsulotlar')
     mahsulot = models.ForeignKey(Mahsulot, on_delete=models.CASCADE)
+
+class Izoh(models.Model):
+    baho = models.PositiveSmallIntegerField()
+    matn = models.CharField(max_length=300)
+    mahsulot = models.ForeignKey(Mahsulot, on_delete=models.CASCADE)
+    profil = models.ForeignKey(Profil, on_delete=models.CASCADE)
+    sana = models.DateField(auto_now_add=True, blank=True, null=True)
+    def __str__(self):
+        return self.matn
