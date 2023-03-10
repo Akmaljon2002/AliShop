@@ -20,3 +20,7 @@ class RegisterView(View):
                 user = user
             )
         return redirect("/user/login/")
+
+class ProfilView(View):
+    def get(self, request):
+        return render(request, 'page-profile-main.html')

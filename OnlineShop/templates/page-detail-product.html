@@ -80,19 +80,8 @@
                     </dl>
 
                     <div class="form-row  mt-4">
-                        <div class="form-group col-md flex-grow-0">
-                            <div class="input-group mb-3 input-spinner">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-light" type="button" id="button-plus"> +</button>
-                                </div>
-                                <input type="text" class="form-control" value="1">
-                                <div class="input-group-append">
-                                    <button class="btn btn-light" type="button" id="button-minus"> &minus;</button>
-                                </div>
-                            </div>
-                        </div> <!-- col.// -->
                         <div class="form-group col-md">
-                            <a href="#" class="btn  btn-primary">
+                            <a href="/buyurtma/savatga_qosh/{{mahsulot.id}}/" class="btn  btn-primary">
                                 <i class="fas fa-shopping-cart"></i> <span class="text">Add to cart</span>
                             </a>
                             <a href="#" class="btn btn-light">
@@ -112,40 +101,47 @@
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
 <div class="container d-flex justify-content-center align-items-center">
-    <form method="post"> {%csrf_token%}
-        <div class="form-group">
-            <label for="smileyRating">Your rating</label>
-            <div class="rating-container" id="smileyRating">
-                <input type="radio" name="rating" value="1">
-                <label class="smiley-face" for="smiley1">&#9785;</label>
-                <input type="radio" name="rating" value="2">
-                <label class="smiley-face" for="smiley2">&#x1F610;</label>
-                <input type="radio" name="rating" value="3">
-                <label class="smiley-face" for="smiley3">&#x1F642;</label>
-                <input type="radio" name="rating" value="4">
-                <label class="smiley-face" for="smiley4">&#x1F600;</label>
-                <input type="radio" name="rating" value="5">
-                <label class="smiley-face" for="smiley5">&#x1F929;</label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="exampleInputComment1">Your comment</label>
-            <input type="text" class="form-control" id="exampleInputComment1" aria-describedby="commentHelp"
-                   placeholder="Enter your comment" name="comment">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+<form method="post"> {%csrf_token%}
+  <div class="form-group">
+    <label for="smileyRating">Your rating</label>
+   <div class="rating-container d-flex" id="smileyRating" style="gap: 20px;">
+      <input type="radio" name="rating" value="1" style="display:none;" id="smiley1">
+      <label class="smiley-face" for="smiley1" style="cursor: pointer">&#9785;</label>
+      <input type="radio" name="rating" value="2" style="display:none;" id="smiley2">
+      <label class="smiley-face" for="smiley2" style="cursor: pointer">&#x1F610;</label>
+      <input type="radio" name="rating" value="3" style="display:none;" id="smiley3">
+      <label class="smiley-face" for="smiley3" style="cursor: pointer">&#x1F642;</label>
+      <input type="radio" name="rating" value="4" style="display:none;" id="smiley4">
+      <label class="smiley-face" for="smiley4" style="cursor: pointer">&#x1F600;</label>
+      <input type="radio" name="rating" value="5" style="display:none;" id="smiley5">
+      <label class="smiley-face" for="smiley5" style="cursor: pointer">&#x1F929;</label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputComment1">Your comment</label>
+    <input type="text" class="form-control" id="exampleInputComment1" aria-describedby="commentHelp" placeholder="Enter your comment" name="comment">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 
     <div id="selectedRating"></div>
 
     <script>
-$(document).ready(function() {
-  $('.rating-container input').click(function() {
-    $('#selectedRating').text('Selected rating: ' + $(this).val());
-  });
-});
+document.addEventListener("DOMContentLoaded", () => {
+    var smileyFaces = document.querySelectorAll('.smiley-face');
 
-    </script>
+    smileyFaces.forEach((face) => {
+      face.addEventListener('click', () => {
+        // reset transform of all smiley faces
+        smileyFaces.forEach((face) => {
+          face.style.transform = "none"; // add !important if necessary
+        });
+        // scale up the clicked smiley face
+        face.style.transform = "scale(2)"; // add !important if necessary
+      });
+    });
+  });
+</script>
 </div>
 <div class="container mt-5">
   <div class="row">
@@ -171,7 +167,10 @@ $(document).ready(function() {
           </div>
           <div class="col-sm-10">
             <p>{{ izoh.matn }}</p>
-            <p><small class="text-muted">{{ izoh.sana }}</small></p>
+            <div class="user d-flex" style="gap: 300px">
+                <p><small class="text-muted">{{ izoh.sana }}</small></p>
+                <p><small class="text-muted">{{ izoh.profil.ism }}</small></p>
+            </div>
           </div>
         </div>
         <hr>

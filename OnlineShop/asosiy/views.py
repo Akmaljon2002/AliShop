@@ -58,7 +58,10 @@ class MahsulotView(View):
         for i in Izoh.objects.filter(mahsulot__id=pk):
             son += i.baho
             sanoq += 1
-        rating = (son/sanoq)*20
+        if sanoq != 0:
+            rating = (son/sanoq)*20
+        else:
+            rating = (son) * 20
         data = {
             'mahsulot':Mahsulot.objects.get(id=pk),
             'rasmlar':Media.objects.filter(mahsulot__id=pk),
